@@ -13,7 +13,7 @@
     <TextView
         android:id="@+id/tv_tenloaichi"
         android:background="#FFB85F"
-        android:textColor="#462066"
+        android:textColor="#000044"
         android:gravity="center"
         android:padding="15dp"
         android:textSize="22sp"
