@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+// giao dien khoan thu view item
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,7 +13,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+        // Ten khoan thu
     <TextView
         android:id="@+id/tv_tenkhoanthu"
         android:layout_width="match_parent"
@@ -22,7 +24,7 @@
         android:text="Tên Khoản  Thu"
         android:textColor="#462066"
         android:textSize="22sp"></TextView>
-
+        // số tien
     <TextView
         android:layout_below="@id/tv_tenkhoanthu"
         android:id="@+id/tv_sotien_khoanthu"
@@ -34,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
+            //ngay thu
     <TextView
         android:layout_below="@id/tv_sotien_khoanthu"
         android:id="@+id/tv_ngaythu_khoanthu"
@@ -45,6 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
+     //noi dung
     <TextView
         android:layout_below="@id/tv_ngaythu_khoanthu"
         android:id="@+id/tv_noidung_khoanthu"
@@ -56,6 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
+
+        //loại thu
     <TextView
         android:layout_below="@id/tv_noidung_khoanthu"
         android:id="@+id/tv_loaithu_khoanthu"
@@ -67,6 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>
+      //1. anh cay but co chuc nang sua
     <ImageView
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
@@ -76,6 +83,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp">
     </ImageView>
+        // anh thung rac có chuc nang xoa
     <ImageView
         android:layout_marginTop="10dp"
         android:id="@+id/iv_delete"
