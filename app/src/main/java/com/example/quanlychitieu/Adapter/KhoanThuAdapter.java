@@ -1,5 +1,7 @@
 package com.example.quanlychitieu.Adapter;
 
+import static java.security.AccessController.getContext;
+
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -24,7 +26,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.DAO.KhoanThuDAO;
-import com.example.quanlychitieu.DAO.LoaiThuDAO;
+//import com.example.quanlychitieu.DAO.LoaiThuDAO;
 import com.example.quanlychitieu.DTO.KhoanThu;
 import com.example.quanlychitieu.DTO.LoaiThu;
 import com.example.quanlychitieu.R;
@@ -55,7 +57,7 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
     }
 
     @NonNull
-    //ham cha ve layout hien thi
+    //ham tra ve layout hien thi
     @Override
     public KhoanThuViewHoldel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.khoan_thu_view_item, null);
@@ -94,11 +96,13 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
             tvNgayThuKhoanThu = itemView.findViewById(R.id.tv_ngaythu_khoanthu);
             tvNoiDungKhoanThu = itemView.findViewById(R.id.tv_noidung_khoanthu);
             tvLoaiThuKhoanThu = itemView.findViewById(R.id.tv_loaithu_khoanthu);
+            // tìm kiếm giao diện sửa khoản thi
             ivEdit = itemView.findViewById(R.id.iv_edit);
             ivDel = itemView.findViewById(R.id.iv_delete);
         }
     }
-
+    //để cập nhật các thành phần giao diện người dùng trong đối tượng holder
+    // với dữ liệu mới từ đối tượng KhoanThu tại vị trí position.
     @Override
     public void onBindViewHolder(@NonNull KhoanThuViewHoldel holder, int position, @NonNull List<Object> payloads) {
         KhoanThu khoanThu = khoanThuDAO.getAll().get(position);
@@ -107,7 +111,8 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
         holder.tvNgayThuKhoanThu.setText("Ngày Thu: "+simpleDateFormat.format(khoanThu.getNgayThu()));
         holder.tvNoiDungKhoanThu.setText("Nội Dung: "+khoanThu.getNoiDung());
         holder.tvLoaiThuKhoanThu.setText("Loại Thu: "+loaiThuDAO.getTenLoaiThu(khoanThu.getIdTenLoaiThu()));
-        //Sửa dữ liệu
+// 2.Khi click vào biểu tưởng cây bút sẽ hiển thị tất cả thông tin của khoản thu đó
+// vào giao diện sửa khoản thu
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +147,7 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
                         datePickerDialog.show();
                     }
                 });
-                //set lại dữ liệu khi sửa
+                // 2. cập nhật dữ liệu mới vào đối tượng tại vị trí đã sửa.
                 edSuaTenKhoanThu.setText(khoanThu.getTenKhoanThu());
                 edSuaNgayThuKhoanThu.setText(simpleDateFormat.format(khoanThu.getNgayThu()));
                 edSuaNoiDungKhoanThu.setText(khoanThu.getNoiDung());
@@ -158,23 +163,38 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
 
                 Button btnSua = view.findViewById(R.id.btn_sua_khoanthu);
                 Button btnHuy = view.findViewById(R.id.btn_huy_khoanthu);
+
+                //3.1 click chọn button sửa
                 btnSua.setOnClickListener(new View.OnClickListener() {
                     @Override
+                    //3.1.1 Nếu người dùng không bỏ trống mục nào khi sửa và sẽ cập nhật dữ liệu mới vào đối tượng
+                    // tại vị trí đã sửa. và thông báo sửa thành công.
                     public void onClick(View v) {
-                        khoanThu.setTenKhoanThu(edSuaTenKhoanThu.getText().toString());
-                        khoanThu.setNoiDung(edSuaNoiDungKhoanThu.getText().toString());
-                        khoanThu.setSoTien(Float.parseFloat(edSuaSoTienKhoanThu.getText().toString()));
-                        try {
-                            khoanThu.setNgayThu(simpleDateFormat.parse(edSuaNgayThuKhoanThu.getText().toString()));
-                        } catch (ParseException e) {
-                            e.printStackTrace();
+                        if (edSuaTenKhoanThu.getText().toString().isEmpty() ||
+                                edSuaNoiDungKhoanThu.getText().toString().isEmpty() ||
+                                edSuaNgayThuKhoanThu.getText().toString().isEmpty() ||
+                                edSuaSoTienKhoanThu.getText().toString().isEmpty()) {
+                            Toast.makeText(v.getContext(), "Các Trường Không được để trống", Toast.LENGTH_SHORT).show();
+                            return;
+                        } else {
+                            khoanThu.setTenKhoanThu(edSuaTenKhoanThu.getText().toString());
+
+                            khoanThu.setNoiDung(edSuaNoiDungKhoanThu.getText().toString());
+                            khoanThu.setSoTien(Float.parseFloat(edSuaSoTienKhoanThu.getText().toString()));
+                            try {
+                                khoanThu.setNgayThu(simpleDateFormat.parse(edSuaNgayThuKhoanThu.getText().toString()));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            //set spiner
+                            loaiThu = (LoaiThu) spinner.getSelectedItem();
+                            khoanThu.setIdTenLoaiThu(loaiThu.getIdTenLoaiThu());
                         }
-                        //set spiner
-                        loaiThu = (LoaiThu) spinner.getSelectedItem();
-                        khoanThu.setIdTenLoaiThu(loaiThu.getIdTenLoaiThu());
+
                         long result =  khoanThuDAO.update(khoanThu);
                         if(result>0){
-                            //buoc cap nhap lai du lieu
+
                             arrayListKhoanThu.clear();
                             arrayListKhoanThu.addAll(khoanThuDAO.getAll());
                             notifyDataSetChanged();
@@ -182,15 +202,18 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
                             Toast.makeText(v.getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }else {
+                            //3.1.2  Nếu người dùng bỏ trống bất cứ mục nào thì sẽ không được
+                            // cập nhập và sẽ nhận thông báo sửa thất bại.
                             Toast.makeText(v.getContext(), "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }
                     }
                 });
+                //3.2  click chọn hủy thì sẽ trở về trang khoản thu
                 btnHuy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                       alertDialog.dismiss();
+                        alertDialog.dismiss();
                     }
                 });
             }
