@@ -26,7 +26,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlychitieu.DAO.KhoanThuDAO;
-//import com.example.quanlychitieu.DAO.LoaiThuDAO;
+import com.example.quanlychitieu.DAO.LoaiThuDAO;
 import com.example.quanlychitieu.DTO.KhoanThu;
 import com.example.quanlychitieu.DTO.LoaiThu;
 import com.example.quanlychitieu.R;
