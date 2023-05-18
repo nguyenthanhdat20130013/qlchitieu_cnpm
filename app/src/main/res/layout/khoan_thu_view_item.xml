@@ -18,11 +18,11 @@
         android:id="@+id/tv_tenkhoanthu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFB85F"
+        android:background="#F6B297"
         android:gravity="center"
         android:padding="15dp"
         android:text="Tên Khoản  Thu"
-        android:textColor="#462066"
+        android:textColor="#000044"
         android:textSize="22sp"></TextView>
     <!-- số tien-->
 <TextView

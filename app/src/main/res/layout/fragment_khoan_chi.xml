@@ -14,14 +14,17 @@
     </androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="#FFB85F"
-        android:layout_margin="8dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/fab_addkhoanchi"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="#8ADAA6"
+        android:src="@android:drawable/ic_input_add">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 

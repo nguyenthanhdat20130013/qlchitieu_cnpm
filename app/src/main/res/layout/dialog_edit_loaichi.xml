@@ -7,15 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <TextView
-        android:background="#FFB85F"
+        android:background="#FACE9C"
         android:id="@+id/tv_sua_loaichi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Loại Chi"
-        android:textColor="@color/white"
-        android:textSize="22sp">
+        android:textColor="#205AA7"
+        android:textSize="22sp"
+        android:textStyle="bold">
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="#83C75D"
             android:text="Sửa"
             android:textColor="@color/white"
             android:textSize="18sp">

@@ -11,10 +11,11 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:background="#FFB85F"
+        android:background="#FACE9C"
         android:text="Sửa Khoản Thu"
-        android:textColor="@color/white"
-        android:textSize="22sp">
+        android:textColor="#205AA7"
+        android:textSize="22sp"
+        android:textStyle="bold">
 
     </TextView>
 
@@ -82,7 +83,6 @@
             android:layout_height="wrap_content"
             />
     </com.google.android.material.textfield.TextInputLayout>
-
     <Spinner
         android:layout_gravity="center"
         android:layout_width="300dp"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="#83C75D"
             android:text="Sửa"
             android:textColor="@color/white"
             android:textSize="18sp">

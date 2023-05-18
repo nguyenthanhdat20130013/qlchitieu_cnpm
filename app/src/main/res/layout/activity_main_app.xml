@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            android:background="#136717"
+            android:background="#91AEC4"
             app:titleTextColor="@color/white"
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize"
