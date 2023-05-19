@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#FCF4D9"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -16,11 +16,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="162dp"
+            android:layout_height="129dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
-            android:src="@drawable/projectnotes" />
+            android:src="@drawable/heo_dat" />
 
         <com.google.android.material.textfield.TextInputLayout
             app:errorEnabled="true"
@@ -88,6 +88,6 @@
             android:layout_marginTop="16dp"
             android:gravity="center"
             android:text="@string/back_to_login"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/holo_blue_light" />
     </LinearLayout>
 </ScrollView>
