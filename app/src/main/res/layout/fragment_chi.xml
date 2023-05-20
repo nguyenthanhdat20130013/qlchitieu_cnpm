@@ -11,7 +11,7 @@
      <com.google.android.material.tabs.TabLayout
          android:background="#FFB85F"
          app:tabSelectedTextColor="#462066"
-         app:tabTextColor="@color/black"
+         app:tabTextColor="@color/white"
          app:tabIndicatorColor="#462066"
          app:tabIndicatorHeight="2dp"
          android:id="@+id/tablayout_chi"
