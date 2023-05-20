@@ -22,7 +22,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:text="Tên Khoản Chi"
-        android:textColor="#000044"
+        android:textColor="#FFFFFF"
         android:textSize="22sp"></TextView>
 
     <TextView

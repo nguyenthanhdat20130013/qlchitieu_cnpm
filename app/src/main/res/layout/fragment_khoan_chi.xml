@@ -6,12 +6,12 @@
     tools:context=".Fragment.Fragment_Khoan_Chi">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_alignParentTop="true"
         android:id="@+id/recyclerView_khoanchi"
         android:layout_width="match_parent"
-        android:background="#F8F6F4"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:background="#F8F6F4"></androidx.recyclerview.widget.RecyclerView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_addkhoanchi"
