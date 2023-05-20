@@ -4,22 +4,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="0dp"
     app:cardElevation="10dp"
+    android:layout_marginTop="10dp"
+    android:paddingEnd="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp">
 
     <TextView
         android:id="@+id/tv_tenkhoanchi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFB85F"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="15dp"
-        android:text="Tên Khoản  Chi"
-        android:textColor="#462066"
+        android:text="Tên Khoản Chi"
+        android:textColor="#000044"
         android:textSize="22sp"></TextView>
 
     <TextView

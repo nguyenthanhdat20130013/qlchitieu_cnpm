@@ -4,18 +4,19 @@
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
-    android:background="#FCF4D9">
+    android:background="#D2E9E9">
 
     <TextView
         android:id="@+id/tv_them_khoanchi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFB85F"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="16dp"
         android:text="Thêm Khoản Chi"
-        android:textColor="@color/white"
-        android:textSize="22sp">
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        android:textStyle="bold">
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -106,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="#83C75D"
             android:text="Thêm"
             android:textColor="@color/white"
             android:textSize="18sp">

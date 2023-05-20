@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="#FCF4D9"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -16,11 +16,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="201dp"
+            android:layout_height="241dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
-            android:src="@drawable/projectnotes" />
+            android:src="@drawable/heo_dat" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayoutEmail"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
+            android:background="@color/xanhla"
             android:text="@string/dang_nhap"
             android:textColor="@android:color/white" />
 
