@@ -3,21 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_marginLeft="20dp"
-    android:background="#FCF4D9"
+    android:background="#D2E9E9"
     android:layout_marginRight="20dp"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/tv_sua_loaithu"
-        android:background="#FACE9C"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Loại Thu"
-        android:textColor="#205AA7"
+        android:textColor="@color/black"
         android:textSize="22sp"
-        android:textStyle="bold">
-    </TextView>
+        android:textStyle="bold"></TextView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="20dp"
