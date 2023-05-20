@@ -18,7 +18,7 @@
         android:id="@+id/tv_tenkhoanchi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F6B297"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="15dp"
         android:text="Tên Khoản Chi"

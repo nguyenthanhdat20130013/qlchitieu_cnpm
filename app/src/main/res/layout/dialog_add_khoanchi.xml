@@ -4,17 +4,17 @@
     android:layout_width="match_parent"
     android:layout_margin="8dp"
     android:layout_height="wrap_content"
-    android:background="#FCF4D9">
+    android:background="#D2E9E9">
 
     <TextView
         android:id="@+id/tv_them_khoanchi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FACE9C"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="16dp"
         android:text="Thêm Khoản Chi"
-        android:textColor="#205AA7"
+        android:textColor="@color/black"
         android:textSize="22sp"
         android:textStyle="bold">
     </TextView>
