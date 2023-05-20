@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="10dp"
     app:cardCornerRadius="0dp"
     app:cardElevation="10dp"
     android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:gravity="center"
         android:padding="15dp"
         android:textSize="22sp"
-        android:text="Tên Loại  Chi"
+        android:text="Tên Loại Chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>

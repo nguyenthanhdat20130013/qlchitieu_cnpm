@@ -10,10 +10,10 @@
     <!-- TODO: Update blank fragment layout -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_thu"
-        android:background="#FFB85F"
-        app:tabSelectedTextColor="#462066"
-        app:tabTextColor="@color/white"
-        app:tabIndicatorColor="#462066"
+        android:background="#F8F6F4"
+        app:tabSelectedTextColor="#000044"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorColor="#000044"
         app:tabIndicatorHeight="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
