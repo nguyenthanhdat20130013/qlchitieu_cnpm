@@ -15,7 +15,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:src="@android:drawable/ic_input_add"
-        android:backgroundTint="#FFB85F"
+        android:backgroundTint="#8ADAA6"
         android:layout_margin="8dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

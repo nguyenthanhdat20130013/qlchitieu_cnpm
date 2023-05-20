@@ -40,19 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<PaperOnboardingPage> getPaperOnboardingPageData(){
         PaperOnboardingPage scr1 = new PaperOnboardingPage("",
-                "Dễ dàng truy cập dữ liệu trên nhiều thiết bị",
-                Color.parseColor("#29b497"), R.drawable.step1, R.drawable.iconsearch);
-        PaperOnboardingPage scr2 = new PaperOnboardingPage("",
-                "Kiểm soát từng khoản thu chi với hệ thống báo cáo chi tiết",
-                Color.parseColor("#2796ce"), R.drawable.step2, R.drawable.iconwallet);
-        PaperOnboardingPage scr3 = new PaperOnboardingPage("",
-                "Lên kế hoạch tài chính thông minh và từng bước tiết kiệm để thực hiện hóa ước mơ",
-                Color.parseColor("#e25704"), R.drawable.step3, R.drawable.icnext);
+                "Chào mừng bạn đến với ứng dụng quản lý chi tiêu. Mong bạn có trải nghiệm tốt",
+                Color.parseColor("#a7cbd7"), R.drawable.step0, R.drawable.icnext);
+
 
         ArrayList<PaperOnboardingPage> elements = new ArrayList<>();
         elements.add(scr1);
-        elements.add(scr2);
-        elements.add(scr3);
 
         return elements;
     }
