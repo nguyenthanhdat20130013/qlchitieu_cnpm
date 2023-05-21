@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<PaperOnboardingPage> getPaperOnboardingPageData(){
         PaperOnboardingPage scr1 = new PaperOnboardingPage("",
-                "Chào mừng bạn đến với ứng dụng quản lý chi tiêu. Mong bạn có trải nghiệm tốt",
+                "Chào mừng bạn đến với ứng dụng quản lý chi tiêu cá nhân. Mong bạn có trải nghiệm tốt",
                 Color.parseColor("#a7cbd7"), R.drawable.step0, R.drawable.icnext);
 
 

@@ -14,7 +14,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Khoản Chi"
-        android:textColor="@color/black"
+        android:textColor="#FFFFFF"
         android:textSize="22sp"
         android:textStyle="bold">
     </TextView>
@@ -58,14 +58,14 @@
         android:layout_height="wrap_content"
         android:hint="Ngày Chi"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ed_sua_ngaythukhoanchi"
-            android:inputType="date"
-            android:drawableRight="@drawable/ic_date"
             android:layout_width="match_parent"
-            android:textSize="20dp"
             android:layout_height="wrap_content"
-            />
+            android:drawableRight="@drawable/ic_date"
+            android:inputType="date"
+            android:textSize="20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

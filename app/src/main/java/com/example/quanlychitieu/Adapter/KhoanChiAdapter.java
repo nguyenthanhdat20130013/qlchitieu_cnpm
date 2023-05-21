@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,11 +30,14 @@ import com.example.quanlychitieu.DTO.KhoanChi;
 import com.example.quanlychitieu.DTO.LoaiChi;
 import com.example.quanlychitieu.R;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
+import java.util.Locale;
 
 
 public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanChiHolder> {
@@ -98,20 +102,25 @@ public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanC
 
     @Override
     public void onBindViewHolder(@NonNull KhoanChiHolder holder, int position, @NonNull List<Object> payloads) {
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setGroupingSeparator('.');
+        symbols.setMonetaryDecimalSeparator(',');
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0 ₫", symbols);
+
         KhoanChi khoanChi = arrayListKhoanChi.get(position);
         holder.tvTenKhoanChi.setText(khoanChi.getTenKhoanChi());
-        holder.tvNoiDungKhoanChi.setText("Nội Dung: "+khoanChi.getNoiDung());
-        holder.tvNgayChiKhoanChi.setText("Ngày Chi: "+simpleDateFormat.format(khoanChi.getNgayChi()));
-        holder.tvSoTienKhoanChi.setText("Số Tiền: "+khoanChi.getSoTien()+" vnđ");
-        holder.tvLoaiChiKhoanChi.setText("Loại Chi: "+loaiChiDAO.getTenLoaiChi(khoanChi.getIdTenLoaiChi()));
+        holder.tvNoiDungKhoanChi.setText("Nội Dung: " + khoanChi.getNoiDung());
+        holder.tvNgayChiKhoanChi.setText("Ngày Chi: " + simpleDateFormat.format(khoanChi.getNgayChi()));
+        holder.tvSoTienKhoanChi.setText("Số Tiền: " + decimalFormat.format(khoanChi.getSoTien()));
+        holder.tvLoaiChiKhoanChi.setText("Loại Chi: " + loaiChiDAO.getTenLoaiChi(khoanChi.getIdTenLoaiChi()));
         //sửa sữ liệu
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.dialog_edit_khoanchi,null);
+                View view = LayoutInflater.from(context).inflate(R.layout.dialog_edit_khoanchi, null);
                 builder.setView(view);
-                AlertDialog alertDialog= builder.create();
+                AlertDialog alertDialog = builder.create();
 
                 alertDialog.show();
 
@@ -122,32 +131,59 @@ public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanC
                 Spinner spinner = view.findViewById(R.id.sp_sua_loaichi);
                 //đổ dữu liệu vào cho spinner
                 list = loaiChiDAO.getAll();
-                ArrayAdapter adapter_sp = new ArrayAdapter(context, android.R.layout.simple_list_item_1,list);
+                ArrayAdapter adapter_sp = new ArrayAdapter(context, android.R.layout.simple_list_item_1, list);
                 spinner.setAdapter(adapter_sp);
                 //chon ngay
                 edSuaNgayThuKhoanChi.setOnClickListener(new View.OnClickListener() {
+                    //                    @RequiresApi(api = Build.VERSION_CODES.N)
+//                    @Override
+//                    public void onClick(View v) {
+//                        Calendar calendar = Calendar.getInstance();
+//                        datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                                edSuaNgayThuKhoanChi.setText(dayOfMonth+"-"+(month+1)+"-"+year);
+//                            }
+//                        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+//                        datePickerDialog.show();
+//                    }
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onClick(View v) {
                         Calendar calendar = Calendar.getInstance();
+
+                        // Lấy giá trị từ EditText edSuaNgayThuKhoanChi
+                        String dateString = edSuaNgayThuKhoanChi.getText().toString();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        try {
+                            Date date = dateFormat.parse(dateString);
+                            // Thiết lập giá trị ngày cho Calendar
+                            calendar.setTime(date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                edSuaNgayThuKhoanChi.setText(dayOfMonth+"-"+(month+1)+"-"+year);
+                                // Thiết lập giá trị ngày cho EditText edSuaNgayThuKhoanChi
+                                edSuaNgayThuKhoanChi.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
                             }
-                        },calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR));
+                        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
                         datePickerDialog.show();
                     }
+
                 });
                 //set lại dữ liệu khi sửa
                 edSuaTenKhoanChi.setText(khoanChi.getTenKhoanChi());
                 edSuaNgayThuKhoanChi.setText(simpleDateFormat.format(khoanChi.getNgayChi()));
                 edSuaNoiDungKhoanChi.setText(khoanChi.getNoiDung());
-                edSuaSoTienKhoanChi.setText(khoanChi.getSoTien()+"");
+                edSuaSoTienKhoanChi.setText(khoanChi.getSoTien() + "");
                 int vitri = -1;
-                for (int i=0;i<list.size();i++){
-                    if (list.get(i).getTenLoaiChi().equalsIgnoreCase(loaiChiDAO.getTenLoaiChi(khoanChi.getIdTenLoaiChi()))){
-                        vitri=i;
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTenLoaiChi().equalsIgnoreCase(loaiChiDAO.getTenLoaiChi(khoanChi.getIdTenLoaiChi()))) {
+                        vitri = i;
                         break;
                     }
                 }
@@ -166,19 +202,21 @@ public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanC
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+
                         //set spiner
                         loaiChi = (LoaiChi) spinner.getSelectedItem();
                         khoanChi.setIdTenLoaiChi(loaiChi.getIdTenLoaiChi());
-                        long result =  khoanChiDAO.update(khoanChi);
-                        if(result>0){
+                        long result = khoanChiDAO.update(khoanChi);
+
+                        if (result > 0) {
                             //buoc cap nhap lai du lieu
                             arrayListKhoanChi.clear();
                             arrayListKhoanChi.addAll(khoanChiDAO.getAll());
                             notifyDataSetChanged();
-
+//
                             Toast.makeText(v.getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(v.getContext(), "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }
@@ -196,9 +234,9 @@ public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanC
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.dialog_delete,null);
+                View view = LayoutInflater.from(context).inflate(R.layout.dialog_delete, null);
                 builder.setView(view);
-                AlertDialog alertDialog= builder.create();
+                AlertDialog alertDialog = builder.create();
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.show();
                 Button btn_delete = view.findViewById(R.id.btn_ok_delete);
@@ -206,15 +244,15 @@ public class KhoanChiAdapter extends RecyclerView.Adapter<KhoanChiAdapter.KhoanC
                 btn_delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        long result=khoanChiDAO.delete(khoanChi.getIdKhoanChi());
-                        if(result>0){
+                        long result = khoanChiDAO.delete(khoanChi.getIdKhoanChi());
+                        if (result > 0) {
                             //buoc cap nhap lai du lieu
                             arrayListKhoanChi.clear();
                             arrayListKhoanChi.addAll(khoanChiDAO.getAll());
                             notifyDataSetChanged();
                             Toast.makeText(v.getContext(), "Xóa Thành Công", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(v.getContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }

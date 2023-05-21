@@ -14,7 +14,10 @@ import com.example.quanlychitieu.DTO.KhoanChi;
 import com.example.quanlychitieu.DTO.KhoanThu;
 import com.example.quanlychitieu.R;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class Frg_Start extends Fragment {
@@ -48,10 +51,19 @@ public class Frg_Start extends Fragment {
         for (int i = 0; i < listthu.size(); i++) {
             tongthu = tongthu + listthu.get(i).getSoTien();
         }
+       //Fix 0.0 + vnđ
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setGroupingSeparator('.');
+        symbols.setMonetaryDecimalSeparator(',');
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0 ₫", symbols);
+        //
+        String formattedTongThu = decimalFormat.format(tongthu);
+        String formattedTongChi = decimalFormat.format(tongchi);
         conlai = tongthu - tongchi;
-        tiendathu.setText(tongthu + "");
-        tiendachi.setText(tongchi + "");
-        tienconlai.setText(conlai + "");
+        String formattedConLai = decimalFormat.format(conlai);
+        tiendathu.setText(formattedTongThu + "");
+        tiendachi.setText(formattedTongChi + "");
+        tienconlai.setText(formattedConLai + "");
         return view;
     }
 }

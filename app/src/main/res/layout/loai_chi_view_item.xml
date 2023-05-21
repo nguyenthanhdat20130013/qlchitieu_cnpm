@@ -29,6 +29,7 @@
         android:textSize="20sp"
         android:textColor="@color/black"
         android:background="#D2E9E9"
+        android:textStyle="bold"
         android:text="noi dung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

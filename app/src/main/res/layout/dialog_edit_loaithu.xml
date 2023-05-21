@@ -15,7 +15,7 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Loại Thu"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"></TextView>
 

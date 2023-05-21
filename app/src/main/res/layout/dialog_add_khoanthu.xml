@@ -84,6 +84,15 @@
             />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Spinner
+        android:id="@+id/sp_them_loaithu"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -116,14 +125,5 @@
             android:textSize="18sp"></Button>
 
     </LinearLayout>
-
-    <Spinner
-        android:layout_gravity="center"
-        android:layout_width="300dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:id="@+id/sp_them_loaithu"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>
