@@ -14,9 +14,10 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="Thêm Loại Chi"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="22sp">
+
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout

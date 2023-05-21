@@ -14,9 +14,10 @@
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Loại Chi"
-        android:textColor="@color/black"
+        android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:textSize="22sp">
+
     </TextView>
 
     <com.google.android.material.textfield.TextInputLayout

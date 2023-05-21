@@ -3,20 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_marginLeft="20dp"
-    android:background="#FCF4D9"
+    android:background="#D2E9E9"
     android:layout_marginRight="20dp"
     android:layout_height="wrap_content">
+
     <TextView
         android:id="@+id/tv_sua_loaithu"
-        android:background="#FFB85F"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#91AEC4"
         android:gravity="center"
         android:padding="16dp"
         android:text="Sửa Loại Thu"
         android:textColor="@color/white"
-        android:textSize="22sp">
-    </TextView>
+        android:textSize="22sp"
+        android:textStyle="bold"></TextView>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="20dp"
@@ -48,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="#83C75D"
             android:text="Thêm"
             android:textColor="@color/white"
             android:textSize="18sp">

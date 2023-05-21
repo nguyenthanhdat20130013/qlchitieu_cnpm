@@ -31,16 +31,19 @@ import com.example.quanlychitieu.DTO.KhoanThu;
 import com.example.quanlychitieu.DTO.LoaiThu;
 import com.example.quanlychitieu.R;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
+import java.util.Locale;
 
 
 public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanThuViewHoldel> {
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private Context context;
     private ArrayList<KhoanThu> arrayListKhoanThu;
     LoaiThuDAO loaiThuDAO;
@@ -101,25 +104,32 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
             ivDel = itemView.findViewById(R.id.iv_delete);
         }
     }
+
     //để cập nhật các thành phần giao diện người dùng trong đối tượng holder
     // với dữ liệu mới từ đối tượng KhoanThu tại vị trí position.
     @Override
     public void onBindViewHolder(@NonNull KhoanThuViewHoldel holder, int position, @NonNull List<Object> payloads) {
+        //
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setGroupingSeparator('.');
+        symbols.setMonetaryDecimalSeparator(',');
+        DecimalFormat decimalFormat = new DecimalFormat("#,##0 ₫", symbols);
+        //
         KhoanThu khoanThu = khoanThuDAO.getAll().get(position);
         holder.tvTenKhoanThu.setText(khoanThu.getTenKhoanThu());
-        holder.tvSoTienKhoanThu.setText("Số Tiền: "+khoanThu.getSoTien()+" vnđ");
-        holder.tvNgayThuKhoanThu.setText("Ngày Thu: "+simpleDateFormat.format(khoanThu.getNgayThu()));
-        holder.tvNoiDungKhoanThu.setText("Nội Dung: "+khoanThu.getNoiDung());
-        holder.tvLoaiThuKhoanThu.setText("Loại Thu: "+loaiThuDAO.getTenLoaiThu(khoanThu.getIdTenLoaiThu()));
+        holder.tvSoTienKhoanThu.setText("Số Tiền: " + decimalFormat.format(khoanThu.getSoTien()));
+        holder.tvNgayThuKhoanThu.setText("Ngày Thu: " + simpleDateFormat.format(khoanThu.getNgayThu()));
+        holder.tvNoiDungKhoanThu.setText("Nội Dung: " + khoanThu.getNoiDung());
+        holder.tvLoaiThuKhoanThu.setText("Loại Thu: " + loaiThuDAO.getTenLoaiThu(khoanThu.getIdTenLoaiThu()));
 // 2.Khi click vào biểu tưởng cây bút sẽ hiển thị tất cả thông tin của khoản thu đó
 // vào giao diện sửa khoản thu
         holder.ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.dialog_edit_khoanthu,null);
+                View view = LayoutInflater.from(context).inflate(R.layout.dialog_edit_khoanthu, null);
                 builder.setView(view);
-                AlertDialog alertDialog= builder.create();
+                AlertDialog alertDialog = builder.create();
                 //ẩn background của view-item
                 alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 alertDialog.show();
@@ -130,32 +140,60 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
                 Spinner spinner = view.findViewById(R.id.sp_sua_loaithu);
                 //đổ dữu liệu vào cho spinner
                 list = loaiThuDAO.getAll();
-                ArrayAdapter adapter_sp = new ArrayAdapter(context, android.R.layout.simple_list_item_1,list);
+                ArrayAdapter adapter_sp = new ArrayAdapter(context, android.R.layout.simple_list_item_1, list);
                 spinner.setAdapter(adapter_sp);
                 //chon ngay
                 edSuaNgayThuKhoanThu.setOnClickListener(new View.OnClickListener() {
+                    //                    @RequiresApi(api = Build.VERSION_CODES.N)
+//                    @Override
+//                    public void onClick(View v) {
+//                        Calendar calendar = Calendar.getInstance();
+//                        datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                                edSuaNgayThuKhoanThu.setText(dayOfMonth+"-"+(month+1)+"-"+year);
+//                            }
+//                        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.MONTH));
+//                        datePickerDialog.show();
+//                    }
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onClick(View v) {
                         Calendar calendar = Calendar.getInstance();
+
+                        // Lấy giá trị từ EditText edSuaNgayThuKhoanThu
+                        String dateString = edSuaNgayThuKhoanThu.getText().toString();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+                        try {
+                            Date date = dateFormat.parse(dateString);
+
+                            // Thiết lập giá trị ngày cho Calendar
+                            calendar.setTime(date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                edSuaNgayThuKhoanThu.setText(dayOfMonth+"-"+(month+1)+"-"+year);
+                                // Thiết lập giá trị ngày cho EditText edSuaNgayThuKhoanThu
+                                edSuaNgayThuKhoanThu.setText(dayOfMonth + "-" + (month + 1) + "-" + year);
                             }
-                        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.MONTH));
+                        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+
                         datePickerDialog.show();
                     }
+
                 });
                 // 2. cập nhật dữ liệu mới vào đối tượng tại vị trí đã sửa.
                 edSuaTenKhoanThu.setText(khoanThu.getTenKhoanThu());
                 edSuaNgayThuKhoanThu.setText(simpleDateFormat.format(khoanThu.getNgayThu()));
                 edSuaNoiDungKhoanThu.setText(khoanThu.getNoiDung());
-                edSuaSoTienKhoanThu.setText(khoanThu.getSoTien()+"");
+                edSuaSoTienKhoanThu.setText(khoanThu.getSoTien() + "");
                 int vitri = -1;
-                for (int i=0;i<list.size();i++){
-                    if (list.get(i).getTenLoaiThu().equalsIgnoreCase(loaiThuDAO.getTenLoaiThu(khoanThu.getIdTenLoaiThu()))){
-                        vitri=i;
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).getTenLoaiThu().equalsIgnoreCase(loaiThuDAO.getTenLoaiThu(khoanThu.getIdTenLoaiThu()))) {
+                        vitri = i;
                         break;
                     }
                 }
@@ -192,8 +230,8 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
                             khoanThu.setIdTenLoaiThu(loaiThu.getIdTenLoaiThu());
                         }
 
-                        long result =  khoanThuDAO.update(khoanThu);
-                        if(result>0){
+                        long result = khoanThuDAO.update(khoanThu);
+                        if (result > 0) {
 
                             arrayListKhoanThu.clear();
                             arrayListKhoanThu.addAll(khoanThuDAO.getAll());
@@ -201,7 +239,7 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
 
                             Toast.makeText(v.getContext(), "Sửa Thành Công", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             //3.1.2  Nếu người dùng bỏ trống bất cứ mục nào thì sẽ không được
                             // cập nhập và sẽ nhận thông báo sửa thất bại.
                             Toast.makeText(v.getContext(), "Sửa Thất Bại", Toast.LENGTH_SHORT).show();
@@ -222,24 +260,24 @@ public class KhoanThuAdapter extends RecyclerView.Adapter<KhoanThuAdapter.KhoanT
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view = LayoutInflater.from(context).inflate(R.layout.dialog_delete,null);
+                View view = LayoutInflater.from(context).inflate(R.layout.dialog_delete, null);
                 builder.setView(view);
-                AlertDialog alertDialog= builder.create();
+                AlertDialog alertDialog = builder.create();
                 alertDialog.show();
                 Button btn_delete = view.findViewById(R.id.btn_ok_delete);
                 Button btn_huy_delete = view.findViewById(R.id.btn_no_delete);
                 btn_delete.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        long result=khoanThuDAO.delete(khoanThu.getIdKhoanThu());
-                        if(result>0){
+                        long result = khoanThuDAO.delete(khoanThu.getIdKhoanThu());
+                        if (result > 0) {
                             //buoc cap nhap lai du lieu
                             arrayListKhoanThu.clear();
                             arrayListKhoanThu.addAll(khoanThuDAO.getAll());
                             notifyDataSetChanged();
                             Toast.makeText(v.getContext(), "Xóa Thành Công", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
-                        }else {
+                        } else {
                             Toast.makeText(v.getContext(), "Xóa Thất Bại", Toast.LENGTH_SHORT).show();
                             alertDialog.dismiss();
                         }
