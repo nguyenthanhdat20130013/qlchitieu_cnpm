@@ -11,7 +11,7 @@ public class CreateDB extends SQLiteOpenHelper {
     public CreateDB( Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
-
+    //TẠO DATABASE
     @Override
     public void onCreate(SQLiteDatabase db) {
         //TABLE LOAI CHI
