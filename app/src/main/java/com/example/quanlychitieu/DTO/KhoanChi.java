@@ -3,14 +3,14 @@ package com.example.quanlychitieu.DTO;
 import java.util.Date;
 
 public class KhoanChi {
+    //Tạo đối tượng khoản chi gồm các thuộc tính
     public int idTenLoaiChi;
     public int idKhoanChi;
     public String tenKhoanChi;
     public String noiDung;
     public float soTien;
     public Date ngayChi;
-
-
+    //Khai báo các tên bảng, tên cột, để thuận tiện hơn trong việc tạo database và chỉ cần gọi lên
     public static  final String TB_NAME = "tb_khoanchi";
     public static  final String COL_NAME_ID_PK = "idKhoanChi";
     public static  final String COL_NAME_ID_FK = "idTenLoaiChi";
@@ -18,7 +18,7 @@ public class KhoanChi {
     public static  final String COL_NAME_NOIDUNG = "noiDung";
     public static  final String COL_NAME_SOTIEN = "soTien";
     public static  final String COL_NAME_NGAYCHI = "ngayChi";
-
+    //constructor
     public KhoanChi(int idTenLoaiChi, int idKhoanChi, String tenKhoanChi, String noiDung, float soTien, Date ngayChi) {
         this.idTenLoaiChi = idTenLoaiChi;
         this.idKhoanChi = idKhoanChi;
@@ -27,7 +27,7 @@ public class KhoanChi {
         this.soTien = soTien;
         this.ngayChi = ngayChi;
     }
-
+    //getter/ setter
     public KhoanChi() {
     }
 
