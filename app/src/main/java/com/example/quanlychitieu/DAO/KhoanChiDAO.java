@@ -16,13 +16,14 @@ import java.util.Date;
 
 
 public class KhoanChiDAO {
+    //Sử dụng SQLite làm cơ sở dữ liệu để lưu trữ các dữ liệu
     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
     CreateDB createDB;
 
     public KhoanChiDAO(Context context) {
         createDB = new CreateDB(context);
     }
-    //lay danh sach
+    //Lấy ra danh sách các khoản chi
     public ArrayList<KhoanChi> getAll()  {
         SQLiteDatabase db = createDB.getReadableDatabase();
         ArrayList<KhoanChi> khoanChiArrayList = new ArrayList<>();
@@ -50,7 +51,7 @@ public class KhoanChiDAO {
         db.close();//dong csdl
         return khoanChiArrayList;
     }
-    //Them
+    //Thêm khoản chi mới vào cơ sở dữ liệu
     public long insert(KhoanChi khoanChi){
         SQLiteDatabase db = createDB.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -62,7 +63,7 @@ public class KhoanChiDAO {
         long result=db.insert(KhoanChi.TB_NAME,null,contentValues);
         return result;
     }
-    //Sua
+    //Cập nhật lại 1 khoản chi đã có
     public long update(KhoanChi khoanChi){
         SQLiteDatabase db = createDB.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -74,7 +75,7 @@ public class KhoanChiDAO {
         long result=db.update(KhoanChi.TB_NAME,contentValues,"idKhoanChi = " + khoanChi.getIdKhoanChi(),null);
         return result;
     }
-    //xoa
+    //Xoá khoản chi
     public long delete(int id){
         SQLiteDatabase db = createDB.getWritableDatabase();
         long result = db.delete(KhoanChi.TB_NAME,"idKhoanChi = " + id,null);
